@@ -1,0 +1,14 @@
+[repo]
+name = "beacon"
+kind = "plugin"
+lang = "lua/ts"
+role = "candidate target-navigation policy plugin; metadata-only scaffold"
+owner = "bitty-plugins"
+docs = "bitty-plugins-docs"
+
+[bootstrap]
+version = "0.0.1"
+status = "metadata-only; not onboarded"
+
+[contracts]
+status = "pending W-81/W-90/W-120"

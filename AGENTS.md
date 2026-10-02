@@ -1,0 +1,5 @@
+# Beacon repository guidance
+
+Metadata-only official plugin candidate; no Lua implementation or registry onboarding authorized. Read TODO, repo.toml, CarryCtx, W-81/W-90/W-120 and shared/plugin security contracts. Policy uses public capability-gated APIs only; Core owns targets, generations, annotations and dispatch safety. No first-party bypass, raw host handles or hot-path callbacks.
+
+English only; derive host values from configuration and Git metadata. Start at 0.0.1; Bun owns JS. Use just gates; scaffold checks are not Lua or SDK conformance evidence. Phases CTX-0001 -> 0002 -> 0003 -> 0004 mean bootstrap/contracts/implementation/independent acceptance. Narrow scopes before implementation; named sessions and task worktrees after first commit; managed hooks required. Direct bootstrap authorized, not independent review. No commit/push/release without authority, redacted snapshots only. Preserve unrelated registry pins. No silent installs, destructive cleanup or unowned process kills. Public SDK, manifest grants, invalid-target tests and docs synchronization gate onboarding.
