@@ -1,0 +1,14 @@
+{
+  "name": "bitty-terminal.beacon",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Spatial and semantic workspace targeting policy over the public targeting, label-allocation, overlay, and workspace host APIs.",
+  "license": "MIT",
+  "packageManager": "bun@1.4.2",
+  "devDependencies": {
+    "bitty-plugin-sdk": "github:bitty-terminal/bitty-plugin-sdk#c4f27d3dff0743a1f93c367995e0d244422c7504",
+    "luaparse": "0.3.1",
+    "wasmoon": "1.16.0"
+  }
+}

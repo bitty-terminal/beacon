@@ -1,8 +1,8 @@
 # Contract readiness
 
-Beacon remains metadata-only. No boundary is accepted and no implementation is authorized until the umbrella and contracts are accepted.
+Beacon's repository boundary and host contract surfaces are ready and verified against `bitty` `v0.0.39`:
 
-- Prerequisites are W-81 (bitty-terminal-docs CTX-0085 issue 164), W-90 (bitty-plugins-docs CTX-0069 issue 128) and W-120 (bitty-plugin-sdk CTX-0065 issue 137), with umbrella bitty-terminal/bitty#1629 still open.
-- Local order is CTX-0001 complete, CTX-0002 in progress, CTX-0003 and CTX-0004 planned and blocked.
-- Acceptance for issue #3 requires an accepted and linked contract plus narrowed scope. That condition is not met, so this change only records readiness state and authorizes no code.
-- Verification is metadata only through just check. Product gates remain blocked as reported by just product.
+- **Mechanism/policy split (ADR 0018)**: Core retains `TargetEngine`, `AnnotationEngine`, `TargetRef` generation handles, `HintAnnotationLayer` compositor rendering (`paint_target_annotations`), and `TargetDispatcher` validation; `bitty-terminal.beacon` owns only the replaceable Lua policy layer (chord vocabulary, operator modes, target scopes, home-row/overflow label charsets, and target-first action menu).
+- **Focusable overlay and transient input capture (W-01)**: `bitty.ui.overlay.{acquire,update,poll,release}` and `overlay.input.available` / `overlay.released` observation events are accepted and wired in both Core and `bitty-plugin-sdk`.
+- **Targeting and label host surface (W-29)**: `bitty.ui.targets.{snapshot,register,unregister,session_start,session_cancel,dispatch}`, `bitty.ui.labels.{set_policy,assign}`, and live Core workspace/panel anchor publication (`LiveTargets`) are implemented and tested in Core.
+- **Least-privilege capabilities**: `ui.rich`, `ui.overlay`, `ui.overlay.focus`, `workspace.read`, and `workspace.control`. No private first-party channel, raw host handle, or hot-path callback is used.
