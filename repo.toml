@@ -2,13 +2,13 @@
 name = "beacon"
 kind = "plugin"
 lang = "lua/ts"
-role = "candidate target-navigation policy plugin; metadata-only scaffold"
+role = "spatial and semantic workspace targeting policy plugin"
 owner = "bitty-plugins"
 docs = "bitty-plugins-docs"
 
 [bootstrap]
 version = "0.0.1"
-status = "metadata-only; not onboarded"
+status = "implemented; public-API policy plugin"
 
 [contracts]
-status = "pending W-81/W-90/W-120"
+status = "accepted ADR-0018 mechanism/policy split; W-01 overlay capture; W-29 targeting/labels host surface"

@@ -1,0 +1,72 @@
+# Bitty plugin manifest for Beacon (bitty-terminal.beacon).
+#
+# Spatial and semantic workspace targeting policy over the public targeting,
+# label-allocation, focusable-overlay, and workspace host APIs (ADR 0018,
+# W-01, W-29). Core owns the TargetEngine, AnnotationEngine, generation
+# handles, transient input capture, and command dispatch authority; Beacon
+# owns only the replaceable policy layer (chord vocabulary, operator modes,
+# target scopes, label charset policy, and target-first action menu).
+#
+# `just manifest` validates this file with the authoritative `bitty-plugin-lint`
+# from bitty-plugin-sdk (R-SDK-2), pinned by commit in `package.json` and
+# `bun.lock`.
+
+[plugin]
+id = "bitty-terminal.beacon"
+name = "Beacon"
+version = "0.0.1"
+description = "Spatial and semantic workspace targeting policy over the public targeting, label-allocation, overlay, and workspace host APIs. Presentation and dispatch policy only; never mutates Terminal Truth."
+license = "MIT"
+
+[compat]
+# Minimum-only host compatibility (bitty#2462): live Core target/anchor
+# publication (`LiveTargets`), compositor `HintAnnotationLayer` rendering,
+# `bitty.ui.targets.*`, `bitty.ui.labels.*`, `bitty.ui.overlay.*`, and
+# plugin-suggested keybinding dispatch (`match_plugin_binding`) are all
+# present from the 0.0.31+ release train.
+bitty = ">=0.0.31"
+plugin-api = "^1.0"
+
+[capabilities]
+# Deny by default; five least-privilege grants:
+# - `ui.rich`: build declarative `List` and `Text` overlay scene nodes.
+# - `ui.overlay`: mount the Beacon status/picker overlay and access
+#   `bitty.ui.targets.*` / `bitty.ui.labels.*`.
+# - `ui.overlay.focus`: acquire bounded transient input capture during an
+#   active targeting session.
+# - `workspace.read`: read workspace identity and names via `bitty.workspace.list`.
+# - `workspace.control`: enqueue workspace focus/move/close mutations selected
+#   through Beacon operators.
+# No `terminal.*`, `fs.*`, `process.*`, `network.*`, `clipboard.*`, or
+# `runtime.*` authority is requested or used.
+"ui.rich" = true
+"ui.overlay" = true
+"ui.overlay.focus" = true
+"workspace.read" = true
+"workspace.control" = true
+
+[settings]
+# Declared settings keys read through `bitty.settings.get` at activation.
+# Undeclared reads fail closed with `E_SETTINGS_UNDECLARED`.
+open_chord = { type = "string", default = "alt+b" }
+workspace_chord = { type = "string", default = "alt+g" }
+move_chord = { type = "string", default = "alt+m" }
+default_scope = { type = "string", default = "all" }
+label_home = { type = "string", default = "asdfghjkl" }
+label_overflow = { type = "string", default = "asdfghjkl" }
+viewport_width = { type = "int", default = 80 }
+
+[lazy]
+# Static triggers registered by the host before creating a plugin VM.
+commands = [
+  "bitty-terminal.beacon:start",
+  "bitty-terminal.beacon:goto-workspace",
+  "bitty-terminal.beacon:move-panel",
+  "bitty-terminal.beacon:pick",
+  "bitty-terminal.beacon:cancel",
+]
+events = [
+  "overlay.released",
+  "overlay.input.available",
+  "focus.changed",
+]
